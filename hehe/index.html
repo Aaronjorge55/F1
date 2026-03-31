@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Pedido 💖</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    font-family: Arial, sans-serif;
+}
+
+/* RESPONSIVO */
+@media (max-width: 500px) {
+    .card {
+        width: 85%;
+    }
+}
+
+/* ENVELOPE */
+.envelope {
+    width: 180px;
+    height: 130px;
+    background: #ff6b81;
+    position: relative;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.envelope::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-left: 90px solid transparent;
+    border-right: 90px solid transparent;
+    border-bottom: 65px solid #ff4757;
+    transition: 0.5s;
+}
+
+.open .envelope::before {
+    transform: rotateX(180deg);
+}
+
+/* CARTA */
+.card {
+position: absolute;
+    top: 40%; /* sobe a carta */
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+
+    width: 300px;
+    max-width: 90%;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.open .card {
+      transform: translate(-50%, -50%) scale(1);
+}
+
+/* BOTÕES */
+.buttons {
+    margin-top: 20px;
+    position: relative;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#yes {
+    background: #2ed573;
+    color: white;
+}
+
+#no {
+    background: #ff4757;
+    color: white;
+    position: absolute;
+}
+
+/* CORAÇÕES */
+.heart {
+    position: absolute;
+    color: red;
+    animation: subir 4s linear infinite;
+}
+
+@keyframes subir {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-600px) scale(1.5);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="container">
+    <div class="envelope" onclick="abrirCarta()"></div>
+
+    <div class="card">
+        <h2>Oi 💖</h2>
+        <p>
+         Eu tava aqui pensando em voce (q coisa nao) e em como, sem perceber, você virou uma parte muito importante da minha vida É estranho explicar, mas tudo fica mais leve quando eu falo contigo,a vida soa melhor Você é tão bela quanto uma volta do Leclerc ao pôr do sol,uma boa pessoa, bonita (tal qual o solo de bohemian rapsody ou melhor,november rain) e impossível de não admirar E eu gosto disso, gosto de você, gosto da forma como você me faz sentir,como se eu fosse ate gente (parafraseando pedro bala de capitaes) Então… sem complicar muito:
+        </p>
+
+        <h3>Quer namorar comigo?</h3>
+
+        <div class="buttons">
+            <button id="yes" onclick="aceitou()">SIM 💘</button>
+            <button id="no">NÃO 😈</button>
+        </div>
+    </div>
+</div>
+
+<!-- MÚSICA MP3 -->
+<audio id="musica" src="musica.mp3"></audio>
+
+<script>
+function abrirCarta() {
+    document.getElementById("container").classList.add("open");
+
+    const musica = document.getElementById("musica");
+    musica.volume = 0.2; // começa baixinho
+    musica.play();
+
+    setInterval(criarCoracao, 300);
+}
+
+// BOTÃO NÃO FUGINDO
+const noBtn = document.getElementById("no");
+
+function fugir() {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+}
+
+noBtn.addEventListener("mouseover", fugir);
+noBtn.addEventListener("touchstart", fugir);
+
+// CORAÇÕES
+function criarCoracao() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.bottom = "0px";
+    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 4000);
+}
+
+// BOTÃO SIM
+function aceitou() {
+    window.location.href = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz7oPzFAzJKjaVHQi82Ycz88PFrvIA8RrdEQ&s";
+}
+</script>
+
+</body>
+</html>
